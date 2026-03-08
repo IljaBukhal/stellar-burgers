@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/store';
 import {
   clearConstructor,
   constructorState
@@ -24,7 +24,7 @@ export const BurgerConstructor: FC = () => {
   const isAuthenticated = useSelector(selectIsInit);
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) {
+    if (!isAuthenticated) {
       navigate('/login');
       return;
     }
