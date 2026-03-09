@@ -9,9 +9,10 @@ import {
 import {
   clearOrderState,
   createOrder,
-  selectOrder
+  selectOrder,
+  selectIsLoading
 } from '../../services/slices/orderSlice';
-import { selectIsLoading, selectIsInit } from '../../services/slices/userSlice';
+import { selectIsInit } from '../../services/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
