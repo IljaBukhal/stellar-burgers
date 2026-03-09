@@ -13,15 +13,30 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Preloader } from '@ui';
-import { error } from 'console';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
+import { useDispatch } from '../../services/store';
+import { clearOrderState } from '../../services/slices/orderSlice';
+import { useEffect } from 'react';
+import { fetchIngredients } from '../../services/slices/ingredientsSlice';
+import { getCookie } from '../../utils/cookie';
+import { getUser } from '../../services/slices/userSlice';
 
 const App = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const background = location.state?.background;
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (getCookie('accessToken') || localStorage.getItem('refreshToken')) {
+      dispatch(getUser());
+    }
+  }, [dispatch]);
 
   const getOrderNum = () => {
     const order = location.pathname.split('/').at(-1);
@@ -30,6 +45,7 @@ const App = () => {
 
   const handleModalClose = () => {
     navigate(-1);
+    dispatch(clearOrderState());
   };
 
   return (
