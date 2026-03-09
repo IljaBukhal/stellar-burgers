@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder, TOrdersData } from '@utils-types';
 
 export const fetchFeed = createAsyncThunk('feed/fetch', getFeedsApi);
-
 export const fetchOrderFeed = createAsyncThunk('feed/orderFetch', getOrdersApi);
 
 const feedSlice = createSlice({

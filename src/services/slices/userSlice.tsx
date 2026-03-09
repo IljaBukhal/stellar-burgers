@@ -28,20 +28,20 @@ const initialState: UserState = {
 export const registerUser = createAsyncThunk(
   'user/register',
   async (data: TRegisterData) => {
-    const responce = await registerUserApi(data);
-    localStorage.setItem('refreshToken', responce.refreshToken);
-    setCookie('accessToken', responce.accessToken);
-    return responce.user;
+    const response = await registerUserApi(data);
+    localStorage.setItem('refreshToken', response.refreshToken);
+    setCookie('accessToken', response.accessToken);
+    return response.user;
   }
 );
 
 export const loginUser = createAsyncThunk(
   'user/login',
   async (data: TLoginData) => {
-    const responce = await loginUserApi(data);
-    localStorage.setItem('refreshToken', responce.refreshToken);
-    setCookie('accessToken', responce.accessToken);
-    return responce.user;
+    const response = await loginUserApi(data);
+    localStorage.setItem('refreshToken', response.refreshToken);
+    setCookie('accessToken', response.accessToken);
+    return response.user;
   }
 );
 

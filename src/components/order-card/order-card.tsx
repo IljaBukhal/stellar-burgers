@@ -11,7 +11,6 @@ const maxIngredients = 6;
 
 export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const location = useLocation();
-
   const ingredients: TIngredient[] = useSelector(selectIngredients);
 
   const orderInfo = useMemo(() => {
@@ -27,7 +26,6 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
     );
 
     const total = ingredientsInfo.reduce((acc, item) => acc + item.price, 0);
-
     const ingredientsToShow = ingredientsInfo.slice(0, maxIngredients);
 
     const remains =

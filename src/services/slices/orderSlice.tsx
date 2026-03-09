@@ -79,8 +79,6 @@ export const orderSlice = createSlice({
 });
 
 export const { clearOrderState } = orderSlice.actions;
-
-export default orderSlice.reducer;
-
 export const { selectOrderState, selectOrder, selectIsLoading, selectError } =
   orderSlice.selectors;
+export default orderSlice.reducer;
