@@ -4,6 +4,7 @@ import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import {
   fetchFeed,
+  selectFeed,
   selectIsLoading,
   selectOrdersFeed
 } from '../../services/slices/feedSlice';
@@ -13,6 +14,7 @@ export const Feed: FC = () => {
   const dispatch = useDispatch();
   const orders: TOrder[] = useSelector(selectOrdersFeed);
   const isLoading = useSelector(selectIsLoading);
+  const feed = useSelector(selectFeed);
 
   useEffect(() => {
     dispatch(fetchFeed());
@@ -23,6 +25,6 @@ export const Feed: FC = () => {
   };
 
   if (!orders.length) return 'Нет заказов';
-  if (isLoading) return <Preloader />;
+  if (isLoading || !feed) return <Preloader />;
   return <FeedUI orders={orders} handleGetFeeds={handleGetFeeds} />;
 };
