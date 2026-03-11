@@ -5,6 +5,7 @@ import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import {
+  clearOrderState,
   fetchOrderByNumber,
   selectOrder
 } from '../../services/slices/orderSlice';
@@ -20,7 +21,11 @@ export const OrderInfo: FC = () => {
     if (number && !orderData) {
       dispatch(fetchOrderByNumber(Number(number)));
     }
-  }, [dispatch, number, orderData]);
+
+    return () => {
+      dispatch(clearOrderState());
+    };
+  }, [dispatch, number]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
